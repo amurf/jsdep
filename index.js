@@ -6,7 +6,6 @@ var semver         = require('semver');
 
 var Q                 = require('Q');
 var bower_lookup      = Q.denodeify(registry.lookup);
-var bower_read_config = Q.denodeify(require('bower-json').read);
 
 var cfg        = require('./jsdep.js');
 var javascript = cfg.js;
