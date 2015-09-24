@@ -52,7 +52,7 @@ function copy_files(tmpdir, filetype) {
 
     var file_match = `*.min.${filetype}`;
     // If not using flat bower file structure, find in dist folder
-    if (shell.test('-d', from_dir('dist'))) {
+    if (dir_exists('dist')) {
         copy_to_dir(from_dir(`dist/${filetype}/${file_match}`), to_dir(filetype));
     } else {
         copy_to_dir(from_dir(file_match), to_dir(filetype));
@@ -68,12 +68,16 @@ function copy_files(tmpdir, filetype) {
     });
 }
 
+function dir_exists(dir) {
+    return shell.test('-d', dir);
+}
+
 function to_dir(path) {
     return `${cfg.install_dir}/${path}/`;
 }
 
 function copy_to_dir(files, dir) {
-    if (!shell.test('-d', dir)) {
+    if (!dir_exists(dir)) {
         shell.mkdir('-p', dir);
     }
     shell.cp(files, dir);
