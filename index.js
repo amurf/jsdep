@@ -50,7 +50,7 @@ function copy_files(tmpdir, filetype) {
         return `${tmpdir}/${path}/`;
     }
 
-    var file_match = '*.min.' + filetype;
+    var file_match = `*.min.${filetype}`;
     // If not using flat bower file structure, find in dist folder
     if (shell.test('-d', from_dir('dist'))) {
         copy_to_dir(from_dir(`dist/${filetype}/${file_match}`), to_dir(filetype));
