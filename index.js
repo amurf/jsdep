@@ -14,13 +14,8 @@ var css        = cfg.css;
 
 
 
-javascript.forEach(function(lib_name) {
-    registry.lookup(lib_name, fetch_func(lib_name, 'js'))
-});
-
-css.forEach(function(lib_name) {
-    registry.lookup(lib_name, fetch_func(lib_name, 'css'))
-});
+javascript.forEach((lib_name) => registry.lookup(lib_name, fetch_func(lib_name, 'js')));
+css.forEach((lib_name) => registry.lookup(lib_name, fetch_func(lib_name, 'css')));
 
 function fetch_func(lib_name, filetype) {
     return function(err, json) {
@@ -29,7 +24,7 @@ function fetch_func(lib_name, filetype) {
             console.error(`* Error during lookup: ${lib_name} not found`);
             return;
         }
-        run_cmd('git', ['ls-remote', '--tags', '--heads', json.url], extract_tags).then(function(version) {
+        run_cmd('git', ['ls-remote', '--tags', '--heads', json.url], extract_tags).then((version) => {
             console.log(`* Installing ${lib_name} ${version}`);
             git_clone(json.url, filetype, lib_name, version);
         });
@@ -38,11 +33,8 @@ function fetch_func(lib_name, filetype) {
 
 function git_clone(url, filetype, lib_name, version) {
     var tmpdir = shell.tempdir() + lib_name;
-    var args = ['clone',  url, '--depth', 1, '-b', version, '--progress', tmpdir];
-
-    run_cmd('git', args).then(function(out, err) {
-        copy_files(tmpdir, filetype, lib_name, version);
-    });
+    var args   = ['clone',  url, '--depth', 1, '-b', version, '--progress', tmpdir];
+    run_cmd('git', args).then((out, err) => copy_files(tmpdir, filetype, lib_name, version));
 }
 
 function copy_files(tmpdir, filetype, lib_name, version) {
@@ -69,16 +61,10 @@ function run_cmd(cmd, args, func) {
     var process = cp.spawn(cmd, args);
     var stdout, stderr;
 
-    process.stdout.on('data', function(data) {
-        stdout += data;
-    });
+    process.stdout.on('data', (data) => stdout += data);
+    process.stderr.on('data', (data) => stderr += data);
 
-    process.stderr.on('data', function(data) {
-        stderr += data;
-    });
-
-
-    process.on('close', function(error_code) {
+    process.on('close', (error_code) => {
         if (func) {
             result.resolve(func(stdout, stderr));
         } else {
@@ -117,7 +103,7 @@ function extract_tags(out, err) {
                   .replace(/[\t ]+/g, ' ')
                   .split(/[\r\n]+/);
 
-    refs.forEach(function(ref) {
+    refs.forEach((ref) => {
         var match = ref.match(/^[a-f0-9]{40}\s+refs\/tags\/(\S+)/);
         if (match) {
             tags.push(match[1]);
