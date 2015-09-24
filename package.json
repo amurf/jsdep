@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "bower-registry-client": "^0.3.0",
-    "q": "^1.4.1"
+    "q": "^1.4.1",
+    "semver": "^5.0.3"
   }
 }
