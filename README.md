@@ -1,6 +1,6 @@
 # jsdep
 
-Grab latest/specific versions of static JS libraries.
+Grab latest versions of css/js libraries.
 
 ## Config
 
@@ -19,4 +19,4 @@ The config below will install angular into src/vendor/js/ and bootsrap (CSS only
     
 ## Usage
 
-Create a config like above and then just `jsdep` to install/update.
+Create a config like above and then just `jsdep` to install/update. Will always override with the latest available version.
