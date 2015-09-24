@@ -6,6 +6,7 @@ Grab latest/specific versions of static JS libraries.
 
 The config below will install angular into src/vendor/js/ and bootsrap (CSS only, ignoring the JS) into src/vendor/css.
 
+    // jsdep.js
     module.exports = {
         js: [
             "angular"
