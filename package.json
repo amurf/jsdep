@@ -1,0 +1,15 @@
+{
+  "name": "jsdep",
+  "version": "0.0.1",
+  "description": "All I wanted was static dependency management",
+  "main": "index.js",
+  "bin": {
+    "jsdep": "./bin/jsdep"
+  },
+  "author": "Ashley Murphy <ash@strategicdata.com.au>",
+  "license": "MIT",
+  "dependencies": {
+    "bower-registry-client": "^0.3.0",
+    "q": "^1.4.1"
+  }
+}
